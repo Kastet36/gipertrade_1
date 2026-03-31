@@ -1298,7 +1298,7 @@
   }
   .slider-slide img {
     width: 100%;
-    height: 560px;
+    height: 450px;
     object-fit: contain;
     display: block;
     background: var(--theme-surface);
@@ -2386,7 +2386,6 @@
   // Slider
   let slideIndex = 0;
   const totalSlides = 23;
-  let slideTimer;
 
   function initSlider() {
     const dots = document.getElementById('sliderDots');
@@ -2397,7 +2396,6 @@
       dot.onclick = () => goToSlide(i);
       dots.appendChild(dot);
     }
-    startAutoplay();
   }
 
   function goToSlide(index) {
@@ -2410,16 +2408,6 @@
 
   function slideMove(dir) {
     goToSlide(slideIndex + dir);
-    restartAutoplay();
-  }
-
-  function startAutoplay() {
-    slideTimer = setInterval(() => goToSlide(slideIndex + 1), 4000);
-  }
-
-  function restartAutoplay() {
-    clearInterval(slideTimer);
-    startAutoplay();
   }
 
   document.addEventListener('DOMContentLoaded', initSlider);
