@@ -1280,6 +1280,72 @@
     .interface-ph-metrics { grid-template-columns: 1fr 1fr; }
   }
 
+  /* ── SLIDER ── */
+  .slider {
+    position: relative;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    box-shadow: 0 4px 32px rgba(17,24,39,0.1);
+    background: var(--theme-surface);
+    border: 1px solid var(--theme-border);
+  }
+  .slider-track {
+    display: flex;
+    transition: transform 0.4s ease;
+  }
+  .slider-slide {
+    min-width: 100%;
+  }
+  .slider-slide img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--theme-bg);
+    border: 1px solid var(--theme-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--theme-text);
+    box-shadow: 0 2px 12px rgba(17,24,39,0.12);
+    transition: background 0.2s, box-shadow 0.2s;
+    z-index: 2;
+  }
+  .slider-btn:hover { background: var(--theme-surface); box-shadow: 0 4px 20px rgba(17,24,39,0.16); }
+  .slider-btn-prev { left: 16px; }
+  .slider-btn-next { right: 16px; }
+  .slider-dots {
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 6px;
+    z-index: 2;
+  }
+  .slider-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.5);
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+    border: none;
+    padding: 0;
+  }
+  .slider-dot.active {
+    background: var(--theme-primary);
+    transform: scale(1.25);
+  }
+
   /* ── FEATURES ACCORDION ── */
   .features-acc { background: var(--theme-bg); }
   .acc-list { display: flex; flex-direction: column; margin-top: 48px; }
@@ -1402,13 +1468,13 @@
     border-bottom: 1px solid var(--theme-border);
   }
   .popup-title {
-    font-size: var(--font-base);
+    font-size: 1.25rem;
     font-weight: var(--font-weight-semibold);
     color: var(--theme-text);
-    margin-bottom: 4px;
+    margin-bottom: 6px;
   }
   .popup-desc {
-    font-size: var(--font-sm);
+    font-size: var(--font-base);
     color: var(--theme-muted-text);
     line-height: 1.5;
   }
@@ -1711,7 +1777,7 @@
           <svg class="benefit-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M9 12l2 2 4-4" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 6h18M3 12h18M3 18h18" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" opacity="0.3"/><rect x="2" y="4" width="20" height="16" rx="3" stroke="currentColor" stroke-width="1.75"/></svg>
         </div>
         <div class="benefit-body">
-          <h3>Маркировка товаров по 488-ФЗ уже внутри системы</h3>
+          <h3>Маркировка товаров "Честный знак" уже внутри системы</h3>
           <p>Гипертрейд автоматизирует учёт маркированных товаров на каждом этапе. Не нужен отдельный инструмент или ручной контроль.</p>
           <div style="margin-top:12px;">
             <div style="font-size:0.85rem; font-weight:600; color:var(--theme-text); margin-bottom:10px;">Что закрывает система:</div>
@@ -1780,96 +1846,39 @@
       <h2>Как выглядит система изнутри</h2>
       <p class="interface-desc">Все процессы в одном месте. Никаких лишних вкладок и переключений.</p>
     </div>
-    <div class="interface-placeholder" aria-label="Интерфейс системы Гипертрейд">
-      <div class="interface-ph-topbar">
-        <div class="interface-ph-dots">
-          <div class="interface-ph-dot"></div>
-          <div class="interface-ph-dot"></div>
-          <div class="interface-ph-dot"></div>
-        </div>
-        <div class="interface-ph-urlbar"></div>
+    <div class="slider" id="slider">
+      <div class="slider-track" id="sliderTrack">
+        <div class="slider-slide"><img src="01-Раздел-продажи-в-интернете.png" alt="Раздел продажи в интернете" loading="lazy"></div>
+        <div class="slider-slide"><img src="02-Раздел-склад.png" alt="Раздел склад" loading="lazy"></div>
+        <div class="slider-slide"><img src="03-Раздел-отчеты.png" alt="Раздел отчёты" loading="lazy"></div>
+        <div class="slider-slide"><img src="04-Выгрузка-данных-на-маркетплейсы-Выгрузка-номенклатуры.png" alt="Выгрузка номенклатуры" loading="lazy"></div>
+        <div class="slider-slide"><img src="05-Выгрузка-данных-на-маркетплейсы-Выгрузка-цен.png" alt="Выгрузка цен" loading="lazy"></div>
+        <div class="slider-slide"><img src="06-Расчет-продажных-цен.png" alt="Расчёт продажных цен" loading="lazy"></div>
+        <div class="slider-slide"><img src="07-Список-заказов.png" alt="Список заказов" loading="lazy"></div>
+        <div class="slider-slide"><img src="08-Рабочее-место-упаковщика.png" alt="Рабочее место упаковщика" loading="lazy"></div>
+        <div class="slider-slide"><img src="09-Заказ.png" alt="Заказ" loading="lazy"></div>
+        <div class="slider-slide"><img src="10-Отчет-по-продажам.png" alt="Отчёт по продажам" loading="lazy"></div>
+        <div class="slider-slide"><img src="11-Динамика-продаж.png" alt="Динамика продаж" loading="lazy"></div>
+        <div class="slider-slide"><img src="12-Отчет-по-количеству-и-суммам-продаж.png" alt="Отчёт по количеству и суммам продаж" loading="lazy"></div>
+        <div class="slider-slide"><img src="13-График-по-суммам-продаж.png" alt="График по суммам продаж" loading="lazy"></div>
+        <div class="slider-slide"><img src="14-Статистика-продаж-по-дням-и-часам.png" alt="Статистика продаж по дням и часам" loading="lazy"></div>
+        <div class="slider-slide"><img src="15-Отчет-по-используемым-комиссиям-размещения.png" alt="Отчёт по комиссиям" loading="lazy"></div>
+        <div class="slider-slide"><img src="16-Отчет-по-оборачиваемости-складских-остатков.png" alt="Оборачиваемость складских остатков" loading="lazy"></div>
+        <div class="slider-slide"><img src="17-Отчет-по-остаткам-товаров-распродажм.png" alt="Остатки товаров распродаж" loading="lazy"></div>
+        <div class="slider-slide"><img src="18-Оповещения-об-экстренных-и-проблемных-ситуациях.png" alt="Оповещения" loading="lazy"></div>
+        <div class="slider-slide"><img src="19-Репрайсер-Wildberries.png" alt="Репрайсер Wildberries" loading="lazy"></div>
+        <div class="slider-slide"><img src="20-Загрузка-и-выгрузка-товаров-в-Excel.png" alt="Загрузка и выгрузка в Excel" loading="lazy"></div>
+        <div class="slider-slide"><img src="21-Карточка-товара-1.png" alt="Карточка товара 1" loading="lazy"></div>
+        <div class="slider-slide"><img src="22-Карточка-товара-2.png" alt="Карточка товара 2" loading="lazy"></div>
+        <div class="slider-slide"><img src="23-Категории-товаров-Ozon.png" alt="Категории товаров Ozon" loading="lazy"></div>
       </div>
-      <div class="interface-ph-body">
-        <div class="interface-ph-sidebar" aria-hidden="true">
-          <div class="interface-ph-nav-item active">
-            <div class="interface-ph-nav-icon"></div>
-            <div class="interface-ph-nav-label"></div>
-          </div>
-          <div class="interface-ph-nav-item">
-            <div class="interface-ph-nav-icon"></div>
-            <div class="interface-ph-nav-label"></div>
-          </div>
-          <div class="interface-ph-nav-item">
-            <div class="interface-ph-nav-icon"></div>
-            <div class="interface-ph-nav-label"></div>
-          </div>
-          <div class="interface-ph-nav-item">
-            <div class="interface-ph-nav-icon"></div>
-            <div class="interface-ph-nav-label"></div>
-          </div>
-          <div class="interface-ph-nav-item">
-            <div class="interface-ph-nav-icon"></div>
-            <div class="interface-ph-nav-label"></div>
-          </div>
-          <div class="interface-ph-nav-item">
-            <div class="interface-ph-nav-icon"></div>
-            <div class="interface-ph-nav-label"></div>
-          </div>
-        </div>
-        <div class="interface-ph-main" aria-hidden="true">
-          <div class="interface-ph-metrics">
-            <div class="interface-ph-metric">
-              <div class="interface-ph-metric-val accent"></div>
-              <div class="interface-ph-metric-label"></div>
-            </div>
-            <div class="interface-ph-metric">
-              <div class="interface-ph-metric-val"></div>
-              <div class="interface-ph-metric-label"></div>
-            </div>
-            <div class="interface-ph-metric">
-              <div class="interface-ph-metric-val"></div>
-              <div class="interface-ph-metric-label"></div>
-            </div>
-            <div class="interface-ph-metric">
-              <div class="interface-ph-metric-val accent"></div>
-              <div class="interface-ph-metric-label"></div>
-            </div>
-          </div>
-          <div class="interface-ph-table">
-            <div class="interface-ph-table-head">
-              <div class="interface-ph-cell"></div>
-              <div class="interface-ph-cell short"></div>
-              <div class="interface-ph-cell short"></div>
-              <div class="interface-ph-cell short"></div>
-            </div>
-            <div class="interface-ph-table-row">
-              <div class="interface-ph-cell"></div>
-              <div class="interface-ph-cell short accent"></div>
-              <div class="interface-ph-cell short"></div>
-              <div class="interface-ph-cell short accent"></div>
-            </div>
-            <div class="interface-ph-table-row">
-              <div class="interface-ph-cell"></div>
-              <div class="interface-ph-cell short"></div>
-              <div class="interface-ph-cell short accent"></div>
-              <div class="interface-ph-cell short"></div>
-            </div>
-            <div class="interface-ph-table-row">
-              <div class="interface-ph-cell"></div>
-              <div class="interface-ph-cell short accent"></div>
-              <div class="interface-ph-cell short"></div>
-              <div class="interface-ph-cell short accent"></div>
-            </div>
-            <div class="interface-ph-table-row">
-              <div class="interface-ph-cell" style="opacity:0.5;"></div>
-              <div class="interface-ph-cell short" style="opacity:0.5;"></div>
-              <div class="interface-ph-cell short" style="opacity:0.5;"></div>
-              <div class="interface-ph-cell short" style="opacity:0.5;"></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="interface-ph-note">Скриншоты интерфейса системы будут размещены здесь</div>
+      <button class="slider-btn slider-btn-prev" onclick="slideMove(-1)" aria-label="Назад">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M13 4l-6 6 6 6" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <button class="slider-btn slider-btn-next" onclick="slideMove(1)" aria-label="Вперёд">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7 4l6 6-6 6" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="slider-dots" id="sliderDots"></div>
     </div>
   </div>
 </section>
@@ -1996,8 +2005,8 @@
             </div>
             <div class="acc-card">
               <div class="acc-badge">Учёт</div>
-              <div class="acc-card-title">Интеграция с 1С:Бухгалтерией</div>
-              <div class="acc-card-desc">Обмен данными для корректного учёта, налогов и регламентированной отчётности.</div>
+              <div class="acc-card-title">Контроль цен поставщиков</div>
+              <div class="acc-card-desc">Сравнивает прайс с фактическими ценами отгрузки. Выявляет расхождения до того, как они стали потерями.</div>
             </div>
             <div class="acc-card">
               <div class="acc-badge">Кластер</div>
@@ -2334,17 +2343,7 @@
       </div>
       <div class="contact-form-card">
         <h3>Не знаете с чего начать?<br>Закажите звонок менеджера!</h3>
-        <form onsubmit="handleForm(event)" novalidate>
-          <div class="form-group">
-            <label class="form-label" for="form-name">Имя</label>
-            <input class="form-input" type="text" id="form-name" name="name" placeholder="Ваше имя" autocomplete="given-name" required>
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="form-phone">Телефон</label>
-            <input class="form-input" type="tel" id="form-phone" name="phone" placeholder="+7 (___) ___-__-__" autocomplete="tel" required>
-          </div>
-          <button type="submit" class="btn-primary form-submit" style="color:#FFFFFF !important; -webkit-text-fill-color:#FFFFFF !important;">Заказать звонок</button>
-        </form>
+        <a href="#" class="btn-primary" onclick="openPopup('popup-demo'); return false;">Заказать звонок</a>
       </div>
     </div>
   </div>
@@ -2381,6 +2380,47 @@
       document.querySelectorAll('.popup-overlay.open').forEach(el => closePopup(el.id));
     }
   });
+
+  // Slider
+  let slideIndex = 0;
+  const totalSlides = 23;
+  let slideTimer;
+
+  function initSlider() {
+    const dots = document.getElementById('sliderDots');
+    for (let i = 0; i < totalSlides; i++) {
+      const dot = document.createElement('button');
+      dot.className = 'slider-dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', 'Слайд ' + (i + 1));
+      dot.onclick = () => goToSlide(i);
+      dots.appendChild(dot);
+    }
+    startAutoplay();
+  }
+
+  function goToSlide(index) {
+    slideIndex = (index + totalSlides) % totalSlides;
+    document.getElementById('sliderTrack').style.transform = `translateX(-${slideIndex * 100}%)`;
+    document.querySelectorAll('.slider-dot').forEach((d, i) => {
+      d.classList.toggle('active', i === slideIndex);
+    });
+  }
+
+  function slideMove(dir) {
+    goToSlide(slideIndex + dir);
+    restartAutoplay();
+  }
+
+  function startAutoplay() {
+    slideTimer = setInterval(() => goToSlide(slideIndex + 1), 4000);
+  }
+
+  function restartAutoplay() {
+    clearInterval(slideTimer);
+    startAutoplay();
+  }
+
+  document.addEventListener('DOMContentLoaded', initSlider);
 
   function toggleAcc(btn) {
     const item = btn.closest('.acc-item');
