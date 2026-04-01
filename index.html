@@ -1440,6 +1440,70 @@
   /* Контакты */
   a.contact-item { color: var(--theme-text); }
 
+  /* ── LIGHTBOX ── */
+  .lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.92);
+    z-index: 2000;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+  .lightbox.open { display: flex; }
+  .lightbox-img {
+    max-width: 100%;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: var(--radius-md);
+    user-select: none;
+  }
+  .lightbox-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    border: none;
+    cursor: pointer;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+  }
+  .lightbox-close:hover { background: rgba(255,255,255,0.25); }
+  .lightbox-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.15);
+    border: none;
+    cursor: pointer;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+  }
+  .lightbox-btn:hover { background: rgba(255,255,255,0.25); }
+  .lightbox-prev { left: 16px; }
+  .lightbox-next { right: 16px; }
+  .lightbox-counter {
+    position: absolute;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: rgba(255,255,255,0.6);
+    font-size: var(--font-sm);
+  }
+
   /* ── POPUP ── */
   .popup-overlay {
     display: none;
@@ -1506,6 +1570,21 @@
 </style>
 </head>
 <body>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightboxOnOverlay(event)">
+  <button class="lightbox-close" onclick="closeLightbox()" aria-label="Закрыть">
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M2 2l12 12M14 2L2 14" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg>
+  </button>
+  <button class="lightbox-btn lightbox-prev" onclick="lightboxMove(-1)" aria-label="Назад">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M13 4l-6 6 6 6" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+  <img class="lightbox-img" id="lightboxImg" src="" alt="">
+  <button class="lightbox-btn lightbox-next" onclick="lightboxMove(1)" aria-label="Вперёд">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7 4l6 6-6 6" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+  <div class="lightbox-counter" id="lightboxCounter"></div>
+</div>
 
 <!-- POPUP -->
 <div class="popup-overlay" id="popup-demo" onclick="closePopupOnOverlay(event)">
@@ -2396,6 +2475,11 @@
       dot.onclick = () => goToSlide(i);
       dots.appendChild(dot);
     }
+    // Сделать слайды кликабельными
+    document.querySelectorAll('.slider-slide img').forEach((img, i) => {
+      img.style.cursor = 'zoom-in';
+      img.addEventListener('click', () => openLightbox(i));
+    });
   }
 
   function goToSlide(index) {
@@ -2411,6 +2495,46 @@
   }
 
   document.addEventListener('DOMContentLoaded', initSlider);
+
+  // Lightbox
+  let lightboxIndex = 0;
+  const slides = document.querySelectorAll ? [] : [];
+
+  function openLightbox(index) {
+    const imgs = document.querySelectorAll('.slider-slide img');
+    lightboxIndex = index;
+    document.getElementById('lightboxImg').src = imgs[lightboxIndex].src;
+    document.getElementById('lightboxImg').alt = imgs[lightboxIndex].alt;
+    document.getElementById('lightboxCounter').textContent = (lightboxIndex + 1) + ' / ' + imgs.length;
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function closeLightboxOnOverlay(e) {
+    if (e.target === e.currentTarget) closeLightbox();
+  }
+
+  function lightboxMove(dir) {
+    const imgs = document.querySelectorAll('.slider-slide img');
+    lightboxIndex = (lightboxIndex + dir + imgs.length) % imgs.length;
+    document.getElementById('lightboxImg').src = imgs[lightboxIndex].src;
+    document.getElementById('lightboxImg').alt = imgs[lightboxIndex].alt;
+    document.getElementById('lightboxCounter').textContent = (lightboxIndex + 1) + ' / ' + imgs.length;
+  }
+
+  document.addEventListener('keydown', function(e) {
+    const lb = document.getElementById('lightbox');
+    if (lb.classList.contains('open')) {
+      if (e.key === 'ArrowLeft') lightboxMove(-1);
+      if (e.key === 'ArrowRight') lightboxMove(1);
+      if (e.key === 'Escape') closeLightbox();
+    }
+  });
 
   function toggleAcc(btn) {
     const item = btn.closest('.acc-item');
