@@ -1644,6 +1644,47 @@
   </div>
 </div>
 
+<div class="popup-overlay" id="popup-call" onclick="closePopupOnOverlay(event)">
+  <div class="popup-card">
+    <div class="popup-header">
+      <div>
+        <div class="popup-title">Есть вопрос? Не знаете с чего начать? Закажите звонок менеджера!</div>
+      </div>
+      <button class="popup-close" onclick="closePopup('popup-call')" aria-label="Закрыть">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="popup-overlay" id="popup-consult" onclick="closePopupOnOverlay(event)">
+  <div class="popup-card">
+    <div class="popup-header">
+      <div>
+        <div class="popup-title">Консультация по сервису Гипертрейд.</div>
+        <div class="popup-desc">Оставьте контакты в форме ниже. Менеджер свяжется с вами, проведёт презентацию сервиса и ответит на все вопросы.</div>
+      </div>
+      <button class="popup-close" onclick="closePopup('popup-consult')" aria-label="Закрыть">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="popup-overlay" id="popup-details" onclick="closePopupOnOverlay(event)">
+  <div class="popup-card">
+    <div class="popup-header">
+      <div>
+        <div class="popup-title">Узнайте подробнее по сервис Гипертрейд.</div>
+        <div class="popup-desc">Оставьте контакты в форме ниже. Менеджер свяжется с вами, проведёт презентацию сервиса и ответит на все вопросы.</div>
+      </div>
+      <button class="popup-close" onclick="closePopup('popup-details')" aria-label="Закрыть">
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.75" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
+
 <!-- NAV -->
 <header class="nav" id="nav">
   <div class="container">
@@ -1655,7 +1696,7 @@
         <li><a href="#contact">Контакты</a></li>
       </ul>
       <div class="nav-cta">
-        <a href="#contact" class="btn-primary" style="padding: 8px 18px; font-size: 0.875rem; background:#E11D48 !important; border-color:#E11D48 !important;">Заказать звонок</a>
+        <a href="#" class="btn-primary" style="padding: 8px 18px; font-size: 0.875rem; background:#E11D48 !important; border-color:#E11D48 !important;" onclick="openPopup('popup-call'); return false;">Заказать звонок</a>
       </div>
       <button class="nav-burger" aria-label="Открыть меню" onclick="toggleNav()">
         <span></span><span></span><span></span>
@@ -1680,7 +1721,7 @@
         <p class="hero-desc">Гипертрейд берёт на себя рутину селлеров маркетплейсов. Один интерфейс вместо четырёх кабинетов и Excel. Мы сократили операционный отдел с 10 до 2 человек на объёме 8 000+ SKU. Протестируйте бесплатно!</p>
         <div class="hero-cta-row">
           <a href="#" class="btn-primary" onclick="openPopup('popup-demo'); return false;">Протестировать бесплатно</a>
-          <a href="#contact" class="btn-secondary">Получить консультацию</a>
+          <a href="#" class="btn-secondary" onclick="openPopup('popup-consult'); return false;">Получить консультацию</a>
         </div>
         <div class="hero-bullets" aria-label="Ключевые функции">
           <span class="hero-bullet">
@@ -2329,7 +2370,7 @@
     <p>Две недели полного доступа бесплатно. Подключение за несколько часов.</p>
     <div class="final-cta-btns">
       <a href="#" class="btn-primary" onclick="openPopup('popup-demo'); return false;">Протестировать бесплатно</a>
-      <a href="#faq" class="btn-ghost-white">Узнать подробнее</a>
+      <a href="#" class="btn-ghost-white" onclick="openPopup('popup-details'); return false;">Узнать подробнее</a>
     </div>
   </div>
 </section>
@@ -2463,7 +2504,7 @@
       </div>
       <div class="contact-form-card">
         <h3>Не знаете с чего начать?<br>Закажите звонок менеджера!</h3>
-        <a href="#" class="btn-primary" onclick="openPopup('popup-demo'); return false;">Заказать звонок</a>
+        <a href="#" class="btn-primary" onclick="openPopup('popup-call'); return false;">Заказать звонок</a>
       </div>
     </div>
   </div>
