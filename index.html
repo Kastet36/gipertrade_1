@@ -2522,6 +2522,60 @@
       img.style.cursor = 'zoom-in';
       img.addEventListener('click', () => openLightbox(i));
     });
+
+    initSliderSwipe();
+  }
+
+  function initSliderSwipe() {
+    const slider = document.getElementById('slider');
+    if (!slider) return;
+
+    let startX = 0;
+    let startY = 0;
+    let isSwiping = false;
+    const swipeThreshold = 50;
+
+    slider.addEventListener('touchstart', (e) => {
+      if (!e.touches || e.touches.length !== 1) return;
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+      isSwiping = true;
+    }, { passive: true });
+
+    slider.addEventListener('touchmove', (e) => {
+      if (!isSwiping || !e.touches || e.touches.length !== 1) return;
+      const currentX = e.touches[0].clientX;
+      const currentY = e.touches[0].clientY;
+      const diffX = Math.abs(currentX - startX);
+      const diffY = Math.abs(currentY - startY);
+
+      if (diffX > diffY) {
+        e.preventDefault();
+      }
+    }, { passive: false });
+
+    slider.addEventListener('touchend', (e) => {
+      if (!isSwiping || !e.changedTouches || e.changedTouches.length !== 1) return;
+
+      const endX = e.changedTouches[0].clientX;
+      const endY = e.changedTouches[0].clientY;
+      const deltaX = endX - startX;
+      const deltaY = endY - startY;
+
+      if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > swipeThreshold) {
+        if (deltaX < 0) {
+          slideMove(1);
+        } else {
+          slideMove(-1);
+        }
+      }
+
+      isSwiping = false;
+    }, { passive: true });
+
+    slider.addEventListener('touchcancel', () => {
+      isSwiping = false;
+    }, { passive: true });
   }
 
   function goToSlide(index) {
