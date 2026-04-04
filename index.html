@@ -2615,6 +2615,61 @@
     if (e.target === e.currentTarget) closeLightbox();
   }
 
+  function initLightboxSwipe() {
+    const lightbox = document.getElementById('lightbox');
+    if (!lightbox) return;
+
+    let startX = 0;
+    let startY = 0;
+    let isSwiping = false;
+    const swipeThreshold = 50;
+
+    lightbox.addEventListener('touchstart', (e) => {
+      if (!lightbox.classList.contains('open')) return;
+      if (!e.touches || e.touches.length !== 1) return;
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+      isSwiping = true;
+    }, { passive: true });
+
+    lightbox.addEventListener('touchmove', (e) => {
+      if (!isSwiping || !lightbox.classList.contains('open')) return;
+      if (!e.touches || e.touches.length !== 1) return;
+      const currentX = e.touches[0].clientX;
+      const currentY = e.touches[0].clientY;
+      const diffX = Math.abs(currentX - startX);
+      const diffY = Math.abs(currentY - startY);
+
+      if (diffX > diffY) {
+        e.preventDefault();
+      }
+    }, { passive: false });
+
+    lightbox.addEventListener('touchend', (e) => {
+      if (!isSwiping || !lightbox.classList.contains('open')) return;
+      if (!e.changedTouches || e.changedTouches.length !== 1) return;
+
+      const endX = e.changedTouches[0].clientX;
+      const endY = e.changedTouches[0].clientY;
+      const deltaX = endX - startX;
+      const deltaY = endY - startY;
+
+      if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > swipeThreshold) {
+        if (deltaX < 0) {
+          lightboxMove(1);
+        } else {
+          lightboxMove(-1);
+        }
+      }
+
+      isSwiping = false;
+    }, { passive: true });
+
+    lightbox.addEventListener('touchcancel', () => {
+      isSwiping = false;
+    }, { passive: true });
+  }
+
   function lightboxMove(dir) {
     const imgs = document.querySelectorAll('.slider-slide img');
     lightboxIndex = (lightboxIndex + dir + imgs.length) % imgs.length;
@@ -2631,6 +2686,8 @@
       if (e.key === 'Escape') closeLightbox();
     }
   });
+
+  document.addEventListener('DOMContentLoaded', initLightboxSwipe);
 
   function toggleAcc(btn) {
     const item = btn.closest('.acc-item');
