@@ -1599,9 +1599,43 @@
   .popup-body { padding: 0; }
   .popup-body iframe { display: block; width: 100%; border: none; }
 
+  .cookie-bar {
+    position: fixed;
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+    z-index: 1100;
+    background: var(--theme-bg);
+    border: 1px solid var(--theme-border);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 12px 32px rgba(17,24,39,0.18);
+    padding: 14px 16px;
+  }
+  .cookie-bar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .cookie-text {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--theme-muted-text);
+    line-height: 1.5;
+  }
+  .cookie-btn {
+    flex-shrink: 0;
+    padding: 10px 16px;
+    font-size: 0.9rem;
+  }
+  .cookie-bar.hidden { display: none; }
+
   @media (max-width: 480px) {
     .popup-overlay { padding: 0; align-items: flex-end; }
     .popup-card { border-radius: var(--radius-xl) var(--radius-xl) 0 0; max-width: 100%; }
+    .cookie-bar { left: 10px; right: 10px; bottom: 10px; }
+    .cookie-bar-inner { flex-direction: column; align-items: stretch; }
+    .cookie-btn { width: 100%; justify-content: center; }
   }
 
 </style>
@@ -1728,7 +1762,7 @@
           Управление маркетплейсами в 1С
         </div>
         <h1 class="hero-title">Программа для управления продажами на маркетплейсах</h1>
-        <p class="hero-desc">Гипертрейд берёт на себя рутину селлеров маркетплейсов. Один интерфейс вместо трёх кабинетов и Excel. Мы сократили операционный отдел с 10 до 2 человек на объёме 8 000+ SKU. Протестируйте бесплатно!</p>
+        <p class="hero-desc">Гипертрейд берёт на себя рутину селлеров маркетплейсов. Один интерфейс вместо трёх кабинетов и Excel. Мы сократили операционный отдел с 10 до 2 человек на объёме 8 000+ карточек. Протестируйте бесплатно!</p>
         <div class="hero-cta-row">
           <a href="#" class="btn-primary" onclick="openPopup('popup-demo'); return false;">Протестировать бесплатно</a>
           <a href="#" class="btn-secondary" onclick="openPopup('popup-consult'); return false;">Получить консультацию</a>
@@ -2573,6 +2607,13 @@
   </div>
 </footer>
 
+<div class="cookie-bar" id="cookie-bar" role="dialog" aria-label="Уведомление об использовании cookie">
+  <div class="cookie-bar-inner">
+    <p class="cookie-text">Продолжая работу с сайтом, Вы разрешаете использование cookie-файлов. Вы всегда можете отключить файлы cookie в настройках вашего браузера.</p>
+    <button class="btn-primary cookie-btn" type="button" onclick="acceptCookies()">Хорошо</button>
+  </div>
+</div>
+
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
   function openPopup(id) {
     document.getElementById(id).classList.add('open');
@@ -2586,6 +2627,12 @@
 
   function closePopupOnOverlay(e) {
     if (e.target === e.currentTarget) closePopup(e.currentTarget.id);
+  }
+
+  function acceptCookies() {
+    localStorage.setItem('cookieAccepted', '1');
+    var bar = document.getElementById('cookie-bar');
+    if (bar) bar.classList.add('hidden');
   }
 
   // Закрытие по Escape
@@ -2778,7 +2825,13 @@
     }
   });
 
-  document.addEventListener('DOMContentLoaded', initLightboxSwipe);
+  document.addEventListener('DOMContentLoaded', function() {
+    initLightboxSwipe();
+    if (localStorage.getItem('cookieAccepted') === '1') {
+      var bar = document.getElementById('cookie-bar');
+      if (bar) bar.classList.add('hidden');
+    }
+  });
 
   function toggleAcc(btn) {
     const item = btn.closest('.acc-item');
