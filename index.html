@@ -1740,7 +1740,7 @@
         <li><a href="#contact">Контакты</a></li>
       </ul>
       <div class="nav-cta">
-        <a href="#" class="btn-primary" style="padding: 8px 18px; font-size: 0.875rem; background:#E11D48 !important; border-color:#E11D48 !important;" onclick="openPopup('popup-call'); return false;">Заказать звонок</a>
+        <a href="#" class="btn-primary" style="padding: 8px 18px; font-size: 0.875rem; background:#E11D48 !important; border-color:#E11D48 !important;" onclick="ym(108264070,'reachGoal','zakazat-zvonok'); openPopup('popup-call'); return false;">Заказать звонок</a>
       </div>
       <button class="nav-burger" aria-label="Открыть меню" onclick="toggleNav()">
         <span></span><span></span><span></span>
@@ -1763,10 +1763,10 @@
         </div>
         <h1 class="hero-title">Программа для управления продажами на маркетплейсах</h1>
         <p class="hero-desc">Гипертрейд берёт на себя рутину селлеров маркетплейсов. Один интерфейс вместо трёх кабинетов и Excel. Мы сократили операционный отдел с 10 до 2 человек на объёме 8 000+ карточек. Протестируйте бесплатно!</p>
-        <div class="hero-cta-row">
-          <a href="#" class="btn-primary" onclick="openPopup('popup-demo'); return false;">Протестировать бесплатно</a>
-          <a href="#" class="btn-secondary" onclick="openPopup('popup-consult'); return false;">Получить консультацию</a>
-        </div>
+         <div class="hero-cta-row">
+           <a href="#" class="btn-primary" onclick="ym(108264070,'reachGoal','protestirovat_besplatno'); openPopup('popup-demo'); return false;">Протестировать бесплатно</a>
+           <a href="#" class="btn-secondary" onclick="ym(108264070,'reachGoal','poluchit_konsultatsiyu'); openPopup('popup-consult'); return false;">Получить консультацию</a>
+         </div>
         <div class="hero-bullets" aria-label="Ключевые функции">
           <span class="hero-bullet">
             <svg class="hero-bullet-icon" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M4.5 7l2 2 3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -2004,7 +2004,7 @@
     </div>
     <div style="margin-top: 96px; display: flex; align-items: center; gap: 40px; flex-wrap: wrap;">
       <p style="flex: 1; min-width: 260px; font-size: 1rem; line-height: 1.7; color: var(--theme-muted-text); margin: 0;">Полный доступ ко всем функциям Гипертрейд бесплатно на 1 неделю. Никаких обязательств. Просто запустите и посмотрите как система работает на вашем ассортименте.</p>
-      <a href="#" class="btn-primary" style="flex-shrink: 0;" onclick="openPopup('popup-demo'); return false;">Протестировать бесплатно</a>
+      <a href="#" class="btn-primary" style="flex-shrink: 0;" onclick="ym(108264070,'reachGoal','protestirovat_besplatno'); openPopup('popup-demo'); return false;">Протестировать бесплатно</a>
     </div>
   </div>
 </section>
@@ -2426,8 +2426,8 @@
     <h2>Готовы попробовать?</h2>
     <p>Одна неделя полного доступа бесплатно. Подключение за несколько часов.</p>
     <div class="final-cta-btns">
-      <a href="#" class="btn-primary" onclick="openPopup('popup-demo'); return false;">Протестировать бесплатно</a>
-      <a href="#" class="btn-ghost-white" onclick="openPopup('popup-details'); return false;">Узнать подробнее</a>
+      <a href="#" class="btn-primary" onclick="ym(108264070,'reachGoal','protestirovat_besplatno'); openPopup('popup-demo'); return false;">Протестировать бесплатно</a>
+      <a href="#" class="btn-ghost-white" onclick="ym(108264070,'reachGoal','uznat_podrobnee'); openPopup('popup-details'); return false;">Узнать подробнее</a>
     </div>
   </div>
 </section>
@@ -2560,9 +2560,9 @@
         </div>
       </div>
       <div class="contact-form-card">
-        <h3>Не знаете с чего начать?<br>Закажите звонок менеджера!</h3>
-        <a href="#" class="btn-primary" onclick="openPopup('popup-call'); return false;">Заказать звонок</a>
-      </div>
+         <h3>Не знаете с чего начать?<br>Закажите звонок менеджера!</h3>
+         <a href="#" class="btn-primary" onclick="ym(108264070,'reachGoal','zakazat-zvonok'); openPopup('popup-call'); return false;">Заказать звонок</a>
+       </div>
     </div>
   </div>
 </section>
@@ -2908,9 +2908,19 @@
   })();
 </script>
 
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=108264070', 'ym');
 
-
-
+    ym(108264070, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/108264070" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
 
 </body>
 </html>
